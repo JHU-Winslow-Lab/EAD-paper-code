@@ -1,1 +1,1 @@
-# Myocyte-Model-Qingchu
+# Modified Walker model
