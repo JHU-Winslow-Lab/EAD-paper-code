@@ -32,8 +32,8 @@ Specifically,
 The randomly generated parameter sets from [F0_generate_samples.m](./Sampling%20files/F0_generate_samples.m) and [F2_generate_Transdata.m](./Sampling%20files/F2_generate_Transdata.m) will be merged into [Random_sample.txt](./ModifiedWalkerModel/output/Random_samples.txt), where first 100 rows are general train samples, 101-200 rows are training samples in transition domain, 201-300 rows are test samples.
 
 To run the myocyte model in [ModifiedWalkerModel folder](./ModifiedWalkerModel), 
-1. you need to modify the file name of main_general_train.cc /main_trans_train.cc /main_general_test.cc to main.cc.
-2. Compile and run code (in the Northeastern Cluster): 
+1. Modify the filename of main_general_train.cc /main_trans_train.cc /main_general_test.cc to main.cc.
+2. Compile and run code (in the Discovery Cluster): 
 ```bash
 # Compile the code
 module load gcc
@@ -54,3 +54,5 @@ The LRM performance evaluation is performed and plotted in [Fig1.m](./LRMmodelin
 
 
 # Part 2. Predicting the clinical arrhythmic risk of LQTS1 mutations
+
+![Figure 3](./Prediction%20results/fig3.tiff)
