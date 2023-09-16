@@ -22,7 +22,7 @@ k_sf   | 0.0000  | 10.8687
 G<sub>Ks</sub>_sf   | 0.0000  | 1.9044
 
 
-To build a LRM predicting P(EAD), we applied our previously published [statistical learning pipeline for the delayed afterdepolarization induced ectopic beat](https://doi.org/10.1371/journal.pcbi.1009536). First, we performed the two-round sampling strategy. In the first round, we randomly uniformly sampled 100 parameter sets in the given range. For each parameter set, we estimate the probabilty of EAD with 100 realizations. In the second round, we randomly sampled 100 parameter sets in the transition domain, which defined coarsely by fitted logistic regression with first-round 100 samples (0.01 < P(EAD) <0.99). We also then independently randomly uniformly generated 100 samples in the given range for the test sample size to evaluate the LRM performance. 
+To build a LRM predicting P(EAD), we applied our previously published statistical learning pipeline for the delayed afterdepolarization induced ectopic beat [[1]](https://doi.org/10.1371/journal.pcbi.1009536). First, we performed the two-round sampling strategy. In the first round, we randomly uniformly sampled 100 parameter sets in the given range. For each parameter set, we estimate the probabilty of EAD with 100 realizations. In the second round, we randomly sampled 100 parameter sets in the transition domain, which defined coarsely by fitted logistic regression with first-round 100 samples (0.01 < P(EAD) <0.99). We also then independently randomly uniformly generated 100 samples in the given range for the test sample size to evaluate the LRM performance. 
 
 Specifically,
 1. [F0_generate_samples.m](./Sampling%20files/F0_generate_samples.m) uniformly generate [100 samples](./Sampling%20files/Samples_general_train.mat) for the first round and also [100 samples](./Sampling%20files/Samples_general_test.mat) for the test set.
@@ -51,8 +51,23 @@ After sampling and large-scale simulations, the results are gathered to fit to t
 
 The LRM performance evaluation is performed and plotted in [Fig1.m](./LRMmodeling/Fig1.m) (Figs 1C-F is shown)
 
+![Figure1](./LRMmodeling/fig1.jpg)
 
+<br />
+<br />
+<br />
 
 # Part 2. Predicting the clinical arrhythmic risk of LQTS1 mutations
 
-![Figure 3](./Prediction%20results/fig3.png)
+In the experiments of Jons et al,. 5 I<sub>Ks</sub>-related functional parameters were measured experimentally for 17 LQTS1 mutation [[2]](https://www.science.org/doi/10.1126/scitranslmed.3001551). Jons et al. quantified the experimental uncertainty in the measurement of each I<sub>Ks</sub> parameter for each mutation by providing a mean (µ) and standard error for each of the five experimentally measured parameters. We derived the standard deviation (σ) from the reported standard error, which is summarized in S1 Table.
+
+We explored 4 mechanistic model-based metrics to predict the clinical risk of LQTS1 mutations. 1) P<sub>m</sub>(EAD) based on Modified Walker model, 2) P<sub>m</sub>(EAD)<sub>G</sub> based on Modified Greenstein model, 3) AP morphology metric desgined by Kernik et al. [[3]](https://doi.org/10.1371/journal.pcbi.1008109), and 4) Transmural repolarization prolongation (TRP) designed by Hoefen [[4]](https://www.jacc.org/doi/abs/10.1016/j.jacc.2012.07.053).
+
+It turns out that each metric fails to predict the clinical risk of LQTS1 mutations (Figs 3A-D). We, then, developed an ensemble model based on 4 metrics using multivariate linera regression. The ensenmble model successfully predict the risk of LQTS1 mutations.
+<p align="center">
+  <img src=./Prediction%20results/fig4.jpg />
+</p>
+
+[Prediction_data.csv](./Prediction%20results/Prediction_data.csv) summarize the prediction results of 4 metrics of 17 mutations and WT. 
+
+[Fig4.m](./Prediction%20results/Fig4.m) performed the leave-one-out cross validation to evaluate the ensemble model performance.
