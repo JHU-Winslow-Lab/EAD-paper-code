@@ -23,12 +23,12 @@ Date: September 2003
 void ReleaseUnit::fcn_fru(const double FRU_states[Nstates_FRU],
 	const double FRUdep_states[Nstates_FRUdep],
 	double dFRU_states1[Nstates_FRU],
-	std::vector<double> &state,
 	int beta_flag,
 	double Cao,
 	int ToggleIndicator[Nstates_FRU])
 {
-	double V, CaJSR;
+	double V, CaJSR, CaSL, CaNSR, nai;
+
 	double CaSS_1, CaSS_2, CaSS_3, CaSS_4;
 	double VF_over_RT, VFsq_over_RT, exp_VFRT;
 	double a1, a2;
@@ -46,14 +46,14 @@ void ReleaseUnit::fcn_fru(const double FRU_states[Nstates_FRU],
 	LType_open = Get_LCC_Open_Cleft();
 	double NRyR_open;
 	NRyR_open = Get_RyR_Open_Cleft();
-	//NRyR_open = 0;//ERROR!!! 09142017
 
 	V = FRUdep_states[index_frudep_V];
-	double CaSL = FRUdep_states[index_frudep_CaSL];
-	double CaNSR = FRUdep_states[index_frudep_CaNSR];
+	CaSL = FRUdep_states[index_frudep_CaSL];
+	CaNSR = FRUdep_states[index_frudep_CaNSR];
+	nai = FRUdep_states[index_frudep_nai];
 
 	CaJSR = FRU_states[index_frustates_CaJSR];
-	CaSS_1 = FRU_states[1];
+	CaSS_1 = FRU_states[index_frustates_CaSS];
 
 	Jtr = (CaNSR - CaJSR) / tautr;
 
@@ -76,8 +76,7 @@ void ReleaseUnit::fcn_fru(const double FRU_states[Nstates_FRU],
 
 	////////////////////////////////////////////////////////////////////////////////////////////
 	
-	double JNaCa_SS1= Get_NCX_flux(FRU_states, state, Cao);
-	//JNaCa_SS1 = 0;//ERROR!!! FOR THE OTHER DISTRIBUTION TEST
+	double JNaCa_SS1= Get_NCX_flux(FRU_states, V,nai, Cao);
 
 	////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -105,7 +104,6 @@ void ReleaseUnit::fcn_fru(const double FRU_states[Nstates_FRU],
 		// dFRU_states1[index_frustates_CaSS] = beta_SS_1 * (- Jxfer_1) / OScale; // dCaSS1
 	}
 	//dFRU_states1[1] = beta_SS_1 * ( JDHPR_1 + JRyR_1 - Jxfer_1) / OScale ; // dCaSS1
-	//dFRU_states1[1] = beta_SS_1 * ( JDHPR_1 + JRyR_1 - Jxfer_1) / OScale ; // dCaSS1 without JNaCa_SS ERROR!!! 09142017
 	//dFRU_states1[1] = 0;
 
 

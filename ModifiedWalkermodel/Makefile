@@ -9,7 +9,7 @@ LDFLAGS=-fopenmp
 #Set to -openmp if Intel or empty if GNU
 OMPFLAGS=-fopenmp
 NAME=stoch3d
-BOOST=/cm/shared/apps/boost/1.60.0/include
+#BOOST=/cm/shared/apps/boost/1.60.0/include
 
 ##########################################
 #               main program             #
@@ -76,7 +76,7 @@ simfru_local.o: simfru_local.cc parameters.h indices.h optionparser.h ReleaseUni
 	$(COMP) -c $(CFLAGS) $(OMPFLAGS)  $<
 
 spirit_wrapper.o: spirit_wrapper.cc parameters.h indices.h optionparser.h ReleaseUnit.h spirit_wrapper.h StochModel.h ExceptionBase.h
-	$(COMP) -c $(CFLAGS) $(OMPFLAGS)  -I$(BOOST) $<
+	$(COMP) -c $(CFLAGS) $(OMPFLAGS)  $<
 
 StochModel.o: StochModel.cc parameters.h indices.h optionparser.h ReleaseUnit.h spirit_wrapper.h StochModel.h ExceptionBase.h
 	$(COMP) -c $(CFLAGS) $(OMPFLAGS)  $<

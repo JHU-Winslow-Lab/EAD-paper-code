@@ -140,6 +140,7 @@ enum frudep_index
 	index_frudep_exp_beta,
 	index_frudep_exp_inf,
 	index_frudep_exp_tau,
+	index_frudep_nai,
 	Nstates_FRUdep
 };
 

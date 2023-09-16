@@ -53,7 +53,6 @@ void ReleaseUnit::simfru(const double time0,
                          const double timef,
                          const double FRUdep_states0[Nstates_FRUdep],
 			 const double FRUdep_statesf[Nstates_FRUdep],
-			 std::vector<double> &state,
 			 unsigned long mt[mtN+1], 
 			 int &mti,
                          int beta_flag,
@@ -136,7 +135,7 @@ void ReleaseUnit::simfru(const double time0,
 	FRU_states[1] = CaSS;*/
 
     // local velocity field for Ca concentrations within the unit
-    fcn_fru(FRU_states1, FRUdep_states, dFRU_states, state, beta_flag, Cao, ToggleIndicator);
+    fcn_fru(FRU_states1, FRUdep_states, dFRU_states, beta_flag, Cao, ToggleIndicator);
 
 	// Delay 100 ms
 	/*if (time0 < 100) {
@@ -157,7 +156,7 @@ void ReleaseUnit::simfru(const double time0,
 
     // event occurs at delta t
     // local velocity field for Ca concentrations within the unit
-    fcn_fru(y_1, FRUdep_states, dFRU_states, state, beta_flag, Cao, ToggleIndicator);
+    fcn_fru(y_1, FRUdep_states, dFRU_states, beta_flag, Cao, ToggleIndicator);
 
 	
 	// Delay 100 ms

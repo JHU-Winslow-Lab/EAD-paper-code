@@ -99,7 +99,7 @@ double StochModel::rk54pd(double t, double tstep, double Iext, double JCa)
 
       //Calculate fluxes that cross functional unit boundaries
       // (Jxfer, Jtr, ICa, Ito2) so that they may be passed to fcn.f
-      distrib_simFRU(start_time, start_time, FRUdep_states0, FRUdep_states0,  state, state, state, &Jxfer, &Jtr, &ICa, &Ito2);
+      distrib_simFRU(start_time, start_time, FRUdep_states0, FRUdep_states0, state, state, &Jxfer, &Jtr, &ICa, &Ito2);
       //send_calc_fru_flux(FRUdep_states0, &Jxfer, &Jtr, &ICa, &Ito2);
 
       //Calculate global velocity field
@@ -127,7 +127,7 @@ double StochModel::rk54pd(double t, double tstep, double Iext, double JCa)
     set_FRUdep_statesf(FRUdep_statesf,y_1);
 
     end_time = start_time + step_size / 5.0;
-    distrib_simFRU(start_time, end_time, FRUdep_states0, FRUdep_statesf, state, state, y_1,
+    distrib_simFRU(start_time, end_time, FRUdep_states0, FRUdep_statesf, state, y_1,
                    &Jxfer, &Jtr, &ICa, &Ito2);//, 0, 0, 0, 0);//&y_1[idx_Cai], &state[idx_Cai], &y_1[idx_CaNSR], &state[idx_CaNSR]);
 
     set_FRUdep_states(FRUdep_states0);
@@ -145,7 +145,7 @@ double StochModel::rk54pd(double t, double tstep, double Iext, double JCa)
 
     st_time = start_time + step_size / 5.0;
     end_time = start_time + step_size * 3.0 / 10.0;
-    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state, state, y_1,
+    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state, y_1,
                    &Jxfer, &Jtr, &ICa, &Ito2); //, 0,0,0,0);//&y_1[idx_Cai], &state[idx_Cai], &y_1[idx_CaNSR], &state[idx_CaNSR]);
 
     set_FRUdep_states(FRUdep_states0);
@@ -162,7 +162,7 @@ double StochModel::rk54pd(double t, double tstep, double Iext, double JCa)
 
     st_time = start_time + step_size * 3.0 / 10.0;
     end_time = start_time + step_size * 3.0 / 5.0;
-    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state, state, y_1,
+    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf,  state, y_1,
                    &Jxfer, &Jtr, &ICa, &Ito2);//, 0,0,0,0);//&y_1[idx_Cai], &state[idx_Cai], &y_1[idx_CaNSR], &state[idx_CaNSR]);
 
     set_FRUdep_states(FRUdep_states0);
@@ -179,7 +179,7 @@ double StochModel::rk54pd(double t, double tstep, double Iext, double JCa)
 
     st_time = start_time + step_size * 3.0 / 5.0;
     end_time = start_time + step_size * 2.0 / 3.0;
-    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state, y_1, state, 
+    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state, y_1,
                    &Jxfer, &Jtr, &ICa, &Ito2);//, 0,0,0,0);//&y_1[idx_Cai], &state[idx_Cai], &y_1[idx_CaNSR], &state[idx_CaNSR]);
 
     set_FRUdep_states(FRUdep_states0);
@@ -196,7 +196,7 @@ double StochModel::rk54pd(double t, double tstep, double Iext, double JCa)
 
     st_time = start_time + step_size * 2.0 / 3.0;
     end_time = start_time + step_size;
-    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state, state, y_1,
+    distrib_simFRU(st_time, end_time, FRUdep_states0, FRUdep_statesf, state,  y_1,
                    &Jxfer, &Jtr, &ICa, &Ito2);//, 0,0,0,0);//&y_1[idx_Cai], &state[idx_Cai], &y_1[idx_CaNSR], &state[idx_CaNSR]);
 
     fcn(start_time + step_size, y_1, F, dummycurrent, dummyfalse, Jxfer, Jtr, ICa, Ito2, Iext, JCa);
@@ -514,7 +514,7 @@ void StochModel::set_FRUdep_states(double FRUdep_states[Nstates_FRUdep])
   const double nu = 1;
   FRUdep_states[index_frudep_exp_inf] =  nu * ( yCa_frac / (1.0 + exp((V + 12.5) / 5.0)) + (1.0 - yCa_frac));
   FRUdep_states[index_frudep_exp_tau] = 60.0 + 340.0 / (1.0	+ exp((V + 30.0) / 12.0));
-
+  FRUdep_states[index_frudep_nai] = state[index_Nai];
 }
 void StochModel::set_FRUdep_statesf(double FRUdep_states[Nstates_FRUdep],std::vector<double> y)
 {
@@ -529,6 +529,7 @@ void StochModel::set_FRUdep_statesf(double FRUdep_states[Nstates_FRUdep],std::ve
   const double nu = 1;
   FRUdep_states[index_frudep_exp_inf] =  nu * ( yCa_frac / (1.0 + exp((V + 12.5) / 5.0)) + (1.0 - yCa_frac));
   FRUdep_states[index_frudep_exp_tau] = 60.0 + 340.0 / (1.0	+ exp((V + 30.0) / 12.0));
+  FRUdep_states[index_frudep_nai] = y[index_Nai];
 
 }
 /*

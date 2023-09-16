@@ -185,17 +185,17 @@ double ReleaseUnit::Get_Allo()
 	return f1*f2*NaCa_state[3] + f1*NaCa_state[4] + f2*NaCa_state[5] + NaCa_state[6];
 }
 
-double ReleaseUnit::Get_NCX_flux(const double FRU_states[Nstates_FRU], std::vector<double> &state, double Cao) {
-	double Nai = state[index_Nai];
+double ReleaseUnit::Get_NCX_flux(const double FRU_states[Nstates_FRU], double V, double Nai, double Cao) {
+	//double Nai;
 	double Nao = 138.0;
 	double Acap = 1.534e-4;
-	double CaSS = FRU_states[1];
+	double CaSS = FRU_states[index_frustates_CaSS];
 	
 	//Nai =10;
 	//Cao = 2;
 	//CaSS = 0.0001;
 	
-	double V = state[index_V];
+	//double V;
 	double VF_over_RT = V / RT_over_F;
 
 	/* lulu  parameters for NaCa exchange current */

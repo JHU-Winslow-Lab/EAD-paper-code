@@ -7,9 +7,9 @@ stoch {
   problemType = stoch;
 
   //Simulation parameters
-  t_final = 10000;//30 //3000;
+  t_final = 101000;//30 //3000;
   period_stim = 1000;
-  t_end_stim = 10000;//30 //3000;
+  t_end_stim = 101000;//30 //3000;
   I_stim = -10000;//-10000; ERROR!!!
 
   VClamp_Flag = 0; //0;
@@ -27,7 +27,7 @@ stoch {
   Default_CaSR = 0.4;
   Default_Nai = 10;
   Cao = 2;
-  clamp_nai = 0;// 0 ERROR!!!
+  clamp_nai = 1;// 0 ERROR!!!
   
   //Beta-adrenergic and HF
   beta_flag = 1;		//1(+ISO), 0 (-ISO)
@@ -44,7 +44,7 @@ stoch {
   Acap = 1.534e-4; 	//1.534e-4 Always  total cell membrane capacitance uF or total cell membrane area cm2
 
   //IKr scaling (for rapid pacing)
-  ikr_scale = 1;     	//2.5 4Hz(+ISO), 1 Norm/HF(-ISO)
+  ikr_scale = 0.833333;     	//2.5 4Hz(+ISO), 1 Norm/HF(-ISO)
 
   //Ouabain parameters (0.1 for 1 uM)
   nak_scale = 1;//0.1 Ouabain 1 Normal 0.8 AnkB+/-

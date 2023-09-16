@@ -221,7 +221,7 @@ void StochModel::Initialize_Currents(const double Iext, const double JCa)
   FRUdep_states[index_frudep_V] = state[index_V];
   FRUdep_states[index_frudep_CaNSR] = state[index_CaNSR];
 
-  distrib_simFRU(0, 0, FRUdep_states, FRUdep_states, state, state, state, &Jxfer, &Jtr, &ICa, &Ito2);
+  distrib_simFRU(0, 0, FRUdep_states, FRUdep_states, state, state, &Jxfer, &Jtr, &ICa, &Ito2);
   int keepc = 1;
   fcn(0, state, F, current, keepc, Jxfer, Jtr, ICa, Ito2, Iext, JCa);
 
@@ -581,10 +581,10 @@ void StochModel::Read_LQTS1_p(std::string LQTS1_Data, int num)
 	readerLQTS1.read(buffer, length);       // read the whole file into the buffer
 	readerLQTS1.close();                    // close file handle
 
-	double data[100][6];
+	double data[300][6];
 	char* p;
 	strtod(buffer, &p);
-	for (int i = 0; i < 100; ++i) {
+	for (int i = 0; i < 300; ++i) {
 		for (int j = 0; j < 6; ++j) {
 			data[i][j] = strtod(p, &p);
 		}

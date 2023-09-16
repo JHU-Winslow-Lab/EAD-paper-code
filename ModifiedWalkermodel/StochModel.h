@@ -164,7 +164,7 @@ private:
   void end_mpi(void);
   void parallel(void);
   void distrib_simFRU(double, double, double[Nstates_FRUdep], double[Nstates_FRUdep],
-		      std::vector<double>&, std::vector<double>&, std::vector<double> &state,
+		      std::vector<double>&, std::vector<double>&,
 		      double *, double *, double *, double *);
   void send_save_state(void);
   void parallel_save_state(void);

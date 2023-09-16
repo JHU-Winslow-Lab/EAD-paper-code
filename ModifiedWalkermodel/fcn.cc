@@ -514,8 +514,8 @@ void StochModel::fcn(const double time, std::vector<double> &state, std::vector<
     IKs *= beta_iks_scale; //3.172248;
   }
   IKs *= iks_scale;
-  printf("beta_iks_scale\n");
-  printf("%f\n",beta_iks_scale);
+  // printf("beta_iks_scale\n");
+  // printf("%f\n",beta_iks_scale);
   IKr *= ikr_scale;
 
   IKv43 = GKv43 * OKv43 * (V - EK);
@@ -917,10 +917,7 @@ void StochModel::fcn(const double time, std::vector<double> &state, std::vector<
 	  flux_ncxi = (ncx_numi1 - ncx_numi2) / (ncx_denumi1 + ncx_denumi2);
 	  Jncxi = Alloi*flux_ncxi*C_ncx*1e3;
 	  INaCaSM[i] = ncx_scale * 0.30 * 96485 * Jncxi / (1.534e-4)*1.8e-11; // lulu NCX need to figure out on frac_NCX //ERROR!!! 09272017
-  	//INaCaSM[i] = ncx_scale * 0.5 * 96485 * Jncxi / (1.534e-4)*1.8e-11; // lulu NCX need to figure out on frac_NCX
   	INaCaSM[i] *= 1.2; //ERROR!!! 1.2 is the new change.
-  	//INaCaSM[i] *= 0.5; //ERROR!!!.For AnkB+/- cell 20180401
-  	//INaCaSM[i] = 0;//ERROR!!!.For  20180424
 
   	FRUs[i].Set_NCXPD_current(INaCaSM[i]);//restore the NCXPD current
 
@@ -967,7 +964,6 @@ void StochModel::fcn(const double time, std::vector<double> &state, std::vector<
     //INaCa_tot += INaCaSM[i] /NFRU + FRUs[i].Get_NCXSS_current();
 	INaCa_tot += INaCaSM[i];
 	INaCaSS += FRUs[i].Get_NCXSS_current();
-    //INaCaSS = 0;//ERROR!!! FOR THE OTHER DISTRIBUTION TEST
     Jxfer_tot += jxfer_i;
     JSL += jsl2cyto;
 
@@ -1017,7 +1013,6 @@ void StochModel::fcn(const double time, std::vector<double> &state, std::vector<
   //lulu ncx for cytosol
   double Allo;
   Allo = f1*f2*A2c + f1*A46c + f2*A2cc + A46cc;
-  //Allo = 0.0;//ERROR!!! FOR 08302017
   double flux_ncx;
   double ncx_num = (kr1*kr2*kr3*kr4*kr5*kr6*Cao*(1e3)*(Nai*Nai*Nai)*(1e3*1e3*1e3) - kf1*kf2*kf3*kf4*kf5*kf6*Cai*(1e3)*(Nao*Nao*Nao)*(1e3*1e3*1e3));
   double ncx_denum = (Z1*Nai*Nai*Nai*(1e3*1e3*1e3) + Z2*Cai*(1e3) + Z3*Nao*Nao*Nao*(1e3*1e3*1e3) + Z4*Cao*(1e3) + Z5*Nai*Nai*Nai*Cao*(1e3*1e3*1e3*1e3) + Z6*Nao*Nao*Nao*Cai*(1e3*1e3*1e3*1e3) + Z7*Nao*Nao*Nao*Nai*Nai*Nai*(1e3*1e3*1e3*1e3*1e3*1e3) + Z8*Cai*Cao*(1e3*1e3));
@@ -1025,8 +1020,7 @@ void StochModel::fcn(const double time, std::vector<double> &state, std::vector<
   double Jncx = Allo*flux_ncx*C_ncx*1e3; //uM/s)
   double INaCa_cyto = ncx_scale*0.55 * 96485 * Jncx / (1.534e-4)*1.8e-11; // lulu NCX need to figure out on frac_NCX
   INaCa_cyto *=1.2;//ERROR!!! 1.2 is the scaling factor, which is the new change.
-  //INaCa_cyto =0; //20180424
-  //INaCa_cyto *=1.0/3;//ERROR!!!
+
 
   // lulu NCX CBD and NCX states derivatives
   double k_a12 = kc12;

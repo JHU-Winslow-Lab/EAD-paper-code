@@ -20,7 +20,6 @@ public:
               const double timef,
               const double FRUdep_states[Nstates_FRUdep],
               const double FRUdep_statesf[Nstates_FRUdep],
-			  std::vector<double> &state,
 	      unsigned long mt[mtN+1], 
 	      int &mti,
               int beta_flag,
@@ -49,7 +48,6 @@ public:
   void fcn_fru(const double FRU_states[Nstates_FRU],
                const double FRUdep_states[Nstates_FRUdep],
                double dFRU_states1[Nstates_FRU],
-			   std::vector<double> &state,
                int beta_flag,
 			   double Cao,
 			   int ToggleIndicator[Nstates_FRU]);
@@ -85,7 +83,7 @@ public:
   double Get_Allo();
 
   double Get_NCX_flux(const double FRU_states[Nstates_FRU],  
-	  std::vector<double> &state,
+	  double V, double Nai,
 	  double Cao);
 
   void Set_Orphan(char c);
