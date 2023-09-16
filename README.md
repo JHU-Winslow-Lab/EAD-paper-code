@@ -55,4 +55,4 @@ The LRM performance evaluation is performed and plotted in [Fig1.m](./LRMmodelin
 
 # Part 2. Predicting the clinical arrhythmic risk of LQTS1 mutations
 
-![Figure 3](./Prediction%20results/fig3.tiff)
+![Figure 3](./Prediction%20results/fig3.png)
