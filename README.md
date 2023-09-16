@@ -71,3 +71,13 @@ It turns out that each metric fails to predict the clinical risk of LQTS1 mutati
 [Prediction_data.csv](./Prediction%20results/Prediction_data.csv) summarize the prediction results of 4 metrics of 17 mutations and WT. 
 
 [Fig4.m](./Prediction%20results/Fig4.m) performed the leave-one-out cross validation to evaluate the ensemble model performance.
+
+
+## References
+[1] Jin, Q., Greenstein, J. L., & Winslow, R. L. (2021). Estimating ectopic beat probability with simplified statistical models that account for experimental uncertainty. PLoS computational biology, 17(10), e1009536.
+
+[2] Jons, C., O-Uchi, J., Moss, A. J., Reumann, M., Rice, J. J., Goldenberg, I., ... & Lopes, C. M. (2011). Use of mutant-specific ion channel characteristics for risk stratification of long QT syndrome patients. Science translational medicine, 3(76), 76ra28-76ra28.
+
+[3] Kernik, D. C., Yang, P. C., Kurokawa, J., Wu, J. C., & Clancy, C. E. (2020). A computational model of induced pluripotent stem-cell derived cardiomyocytes for high throughput risk stratification of KCNQ1 genetic variants. PLoS computational biology, 16(8), e1008109.
+
+[4] Hoefen, R., Reumann, M., Goldenberg, I., Moss, A. J., O-Uchi, J., Gu, Y., ... & Lopes, C. M. (2012). In silico cardiac risk assessment in patients with long QT syndrome: type 1: clinical predictability of cardiac models. Journal of the American College of Cardiology, 60(21), 2182-2191.
